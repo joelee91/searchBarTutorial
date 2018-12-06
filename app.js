@@ -88,12 +88,28 @@ class App extends Component {
 class List extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      filtered: []
+    }
   }
+
+  componentDidMount() {
+    this.setState({
+      filtered: this.props.list
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      filtered: nextProps.list
+    });
+  }
+
   render() {
     return (
       <div>
         <ul>
-          {this.props.list.map(item => (
+          {this.state.filtered.map(item => (
             <li key={item}>
               {item} &nbsp;
               <span

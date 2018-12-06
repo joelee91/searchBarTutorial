@@ -24211,23 +24211,43 @@ function (_React$Component) {
   _inherits(List, _React$Component);
 
   function List(props) {
+    var _this2;
+
     _classCallCheck(this, List);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(List).call(this, props));
+    _this2 = _possibleConstructorReturn(this, _getPrototypeOf(List).call(this, props));
+    _this2.state = {
+      filtered: []
+    };
+    return _this2;
   }
 
   _createClass(List, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        filtered: this.props.list
+      });
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({
+        filtered: nextProps.list
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
-      return _react.default.createElement("div", null, _react.default.createElement("ul", null, this.props.list.map(function (item) {
+      return _react.default.createElement("div", null, _react.default.createElement("ul", null, this.state.filtered.map(function (item) {
         return _react.default.createElement("li", {
           key: item
         }, item, " \xA0", _react.default.createElement("span", {
           className: "delete",
           onClick: function onClick() {
-            return _this2.props.delete(item);
+            return _this3.props.delete(item);
           }
         }));
       })));

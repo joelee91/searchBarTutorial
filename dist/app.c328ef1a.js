@@ -24219,6 +24219,7 @@ function (_React$Component) {
     _this2.state = {
       filtered: []
     };
+    _this2.handleChange = _this2.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this2)));
     return _this2;
   }
 
@@ -24237,11 +24238,48 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      // Variable to hold the original version of the list
+      var currentList = []; // Variable to hold the filtered list before putting into state
+
+      var newList = []; // If the search bar isn't empty
+
+      if (e.target.value !== "") {
+        // Assign the original list to currentList
+        currentList = this.props.list; // Use .filter() to determine which items should be displayed
+        // based on the search terms
+
+        newList = currentList.filter(function (item) {
+          // Change current item to lowercase
+          var lc = item.toLowerCase();
+          var filter = e.target.value.toLowerCase(); // Check to see if the current list item includes the search term
+          // If it does, it will be added to newList. Using lowercase eliminates
+          // Issues with capitalization in search terms and search content
+
+          return lc.includes(filter);
+        });
+      } else {
+        // If the search bar is empty, set newList to original task list
+        newList = this.props.list;
+      } // Set the filtered state based on what our rules added to newList
+
+
+      this.setState({
+        filtered: newList
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
 
-      return _react.default.createElement("div", null, _react.default.createElement("ul", null, this.state.filtered.map(function (item) {
+      return _react.default.createElement("div", null, _react.default.createElement("input", {
+        type: "text",
+        className: "input",
+        onChange: this.handleChange,
+        placeholder: "Search..."
+      }), _react.default.createElement("ul", null, this.state.filtered.map(function (item) {
         return _react.default.createElement("li", {
           key: item
         }, item, " \xA0", _react.default.createElement("span", {

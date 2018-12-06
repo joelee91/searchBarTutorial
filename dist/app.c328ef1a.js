@@ -24176,24 +24176,16 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       return _react.default.createElement("div", {
         className: "content"
       }, _react.default.createElement("div", {
         className: "container"
       }, _react.default.createElement("section", {
         className: "section"
-      }, _react.default.createElement("ul", null, this.state.list.map(function (item) {
-        return _react.default.createElement("li", {
-          key: item
-        }, item, " \xA0", _react.default.createElement("span", {
-          className: "delete",
-          onClick: function onClick() {
-            return _this2.removeItem(item);
-          }
-        }));
-      }))), _react.default.createElement("hr", null), _react.default.createElement("section", {
+      }, _react.default.createElement(List, {
+        list: this.state.list,
+        "delete": this.removeItem
+      })), _react.default.createElement("hr", null), _react.default.createElement("section", {
         className: "section"
       }, _react.default.createElement("form", {
         className: "form",
@@ -24212,6 +24204,38 @@ function (_Component) {
 
   return App;
 }(_react.Component);
+
+var List =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(List, _React$Component);
+
+  function List(props) {
+    _classCallCheck(this, List);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(List).call(this, props));
+  }
+
+  _createClass(List, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return _react.default.createElement("div", null, _react.default.createElement("ul", null, this.props.list.map(function (item) {
+        return _react.default.createElement("li", {
+          key: item
+        }, item, " \xA0", _react.default.createElement("span", {
+          className: "delete",
+          onClick: function onClick() {
+            return _this2.props.delete(item);
+          }
+        }));
+      })));
+    }
+  }]);
+
+  return List;
+}(_react.default.Component);
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('app'));
 },{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","bulma/bulma":"node_modules/bulma/bulma.sass"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -24241,7 +24265,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49825" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59225" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
